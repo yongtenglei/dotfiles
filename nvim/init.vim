@@ -1,11 +1,14 @@
 let mapleader=" "
 syntax on
 set number
-set norelativenumber
+set relativenumber
 set cursorline
 set wrap
 set showcmd
 set wildmenu
+set nobackup
+set noswapfile
+set spell
 
 set hlsearch
 exec "nohlsearch"
@@ -16,15 +19,21 @@ noremap = nzz
 noremap - Nzz
 noremap <LEADER><CR> :nohlsearch<CR>
 
+"进行分屏
 map sr :set splitright<CR>:vsplit<CR>
 map sl :set nosplitright<CR>:vsplit<CR>
 map su :set nosplitbelow<CR>:split<CR>
 map sd :set splitbelow<CR>:split<CR>
 
+"分屏cursor切换
 map <LEADER>l <C-w>l
 map <LEADER>k <C-w>k
 map <LEADER>h <C-w>h
 map <LEADER>j <C-w>j
+
+"切换竖直sh or水平分屏sv
+map sv <C-w>t<C-w>H
+map sh <C-w>t<C-w>K
 
 map <up> :res +5<CR>
 map <down> :res -5<CR>
@@ -34,9 +43,6 @@ map <right> :vertical resize+5<CR>
 map tn :tabe<CR>
 map tl :-tabnext<CR>
 map tn :+tabnext<CR>
-
-map sv <C-w>t<C-w>H
-map sh <C-w>t<C-w>K
 
 set mouse=a
 set encoding=utf-8
@@ -79,7 +85,8 @@ call vundle#end()
 call plug#begin('~/.vim/plugged')
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-"Plug 'jiangmiao/auto-pairs'
+"rainbow parentheses
+Plug 'luochen1990/rainbow'
 
 "注释 <leader>cc 反注释 <leader>cu
 Plug 'scrooloose/nerdcommenter'
@@ -92,6 +99,13 @@ Plug 'scrooloose/nerdtree'
 Plug 'morhetz/gruvbox'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
+"markdown stuff
+Plug 'godlygeek/tabular' "必要插件，安装在vim-markdown前面
+Plug 'plasticboy/vim-markdown'
+Plug 'mzlogin/vim-markdown-toc'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'vimwiki/vimwiki'
+
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
@@ -101,6 +115,45 @@ let g:airline_solarized_bg='dark'
 "gruvbox主题设置
 colorscheme gruvbox
 set background=dark
+
+"vim-markdown
+let g:vim_markdown_math = 1
+"vim-markdown-doc
+let g:vmt_cycle_list_item_markers = 1
+"vim-markdown-preview
+let g:mkdp_browser = 'chromium'
+
+
+
+" Compile function
+map r :call CompileRunGcc()<CR>
+func! CompileRunGcc()
+  exec "w"
+  if &filetype == 'c'
+    exec "!g++ % -o %<"
+    exec "!time ./%<"
+  elseif &filetype == 'cpp'
+    exec "!g++ % -o %<"
+    exec "!time ./%<"
+  elseif &filetype == 'java'
+    exec "!javac %"
+    exec "!time java %<"
+  elseif &filetype == 'sh'
+    :!time bash %
+  elseif &filetype == 'python'
+    silent! exec "!clear"
+    exec "!time python3 %"
+  elseif &filetype == 'html'
+    exec "!firefox % &"
+  elseif &filetype == 'markdown'
+    exec "MarkdownPreview"
+  elseif &filetype == 'vimwiki'
+    exec "MarkdownPreview"
+  endif
+endfunc
+
+"rainbow parentheses
+let g:rainbow_active = 1
 
 "cocvim 配置
 " TextEdit might fail if hidden is not set.
@@ -143,9 +196,9 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" Use <c-space> to trigger completion.
+" Use <c-m> to trigger completion.
 if has('nvim')
-  inoremap <silent><expr> <c-o> coc#refresh()
+  inoremap <silent><expr> <c-m> coc#refresh()
 else
   inoremap <silent><expr> <c-@> coc#refresh()
 endif
@@ -264,4 +317,3 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
-
