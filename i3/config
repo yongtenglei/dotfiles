@@ -198,3 +198,8 @@ bar {
         status_command i3status
 }
 gaps inner 10
+# dock(停靠)模式和hide(隐藏)模式之间切换
+bindsym $mod+n bar mode toggle
+#light-git
+bindsym XF86MonBrightnessUp exec light -A 10 # increase screen brightness
+bindsym XF86MonBrightnessDown exec light -U 10 # decrease screen brightness
