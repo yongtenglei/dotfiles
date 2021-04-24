@@ -13,11 +13,11 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango: DejaVu Sans Mono 8
-
+#font pango: DejaVu Sans Mono 8
+font pango: Fira Code 8
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:DejaVu Sans Mono 8
+font pango: Fira Code 8
 
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
@@ -41,7 +41,8 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec alacritty
+#bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec st
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -49,6 +50,8 @@ bindsym $mod+Shift+q kill
 #open browser
 bindsym $mod+b exec firefox
 
+#deepin-screenshot
+bindsym $mod+m exec deepin-screenshot
 # start dmenu (a program launcher)
 #bindsym $mod+d exec --no-startup-id dmenu_run
 # A more modern dmenu replacement is rofi:
@@ -209,8 +212,11 @@ gaps inner 10
 # dock(停靠)模式和hide(隐藏)模式之间切换
 #bindsym $mod+n bar mode toggle
 #light-git
-bindsym XF86MonBrightnessUp exec light -A 10 # increase screen brigh/split
-bindsym XF86MonBrightnessDown exec light -U 10 # decrease screen brightness
+#bindsym XF86MonBrightnessUp exec light -A 10 # increase screen brigh/split
+#bindsym XF86MonBrightnessDown exec light -U 10 # decrease screen brightness
+#方案2  安装xorg-xbacklight, acpilight,  
+bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
+bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
 
 ################################################################################################
 ## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
