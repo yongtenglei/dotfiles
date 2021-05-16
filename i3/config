@@ -50,8 +50,6 @@ bindsym $mod+Shift+q kill
 #open browser
 bindsym $mod+b exec firefox
 
-#deepin-screenshot
-bindsym $mod+m exec deepin-screenshot
 # start dmenu (a program launcher)
 #bindsym $mod+d exec --no-startup-id dmenu_run
 # A more modern dmenu replacement is rofi:
@@ -74,8 +72,8 @@ exec --no-startup-id picom -b &
 exec_always xrandr -s 1920x1200
 exec_always --no-startup-id ~/scripts/monitor.sh &
 #exec_always bash ~/.config/polybar/launch.sh --forest &
-exec_always killall screenkey
-exec_always sleep 1.5; screenkey
+#exec_always killall screenkey
+#exec_always sleep 1.5; screenkey
 exec fcitx5 &
 # change focus
 bindsym $mod+j focus left
@@ -224,3 +222,4 @@ bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness 
 
 exec --no-startup-id volumeicon
 bindsym $mod+n exec alacritty -e 'alsamixer'
+
