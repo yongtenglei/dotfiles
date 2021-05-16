@@ -90,8 +90,6 @@ set autowrite
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 set clipboard=unnamedplus
 
-
-
 set nocompatible
 filetype on
 filetype indent on
@@ -106,6 +104,9 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 "vim-snippets
 Plug 'honza/vim-snippets'
+
+"visual-multi
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
 "wildfire.vim
 Plug 'gcmt/wildfire.vim'
