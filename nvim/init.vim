@@ -231,17 +231,34 @@ let g:python3_host_prog = "/usr/bin/python3"
 
 "coc config
 let g:coc_global_extensions = [
-            \ 'coc-yank',
-            \ 'coc-vimlsp',
-            \ 'coc-snippets',
-            \ 'coc-pairs',
-            \ 'coc-highlight',
-            \ 'coc-actions',
-            \ 'coc-tsserver',
-            \ 'coc-pyright',
-            \ 'coc-json',
-            \ 'coc-go',
-            \ 'coc-clangd']
+	\ 'coc-css',
+	\ 'coc-diagnostic',
+	\ 'coc-eslint',
+	\ 'coc-explorer',
+	\ 'coc-flutter-tools',
+	\ 'coc-gitignore',
+	\ 'coc-html',
+	\ 'coc-import-cost',
+	\ 'coc-json',
+	\ 'coc-lists',
+	\ 'coc-prettier',
+	\ 'coc-prisma',
+	\ 'coc-pyright',
+	\ 'coc-clangd',
+	\ 'coc-snippets',
+	\ 'coc-sourcekit',
+	\ 'coc-stylelint',
+	\ 'coc-syntax',
+	\ 'coc-tailwindcss',
+	\ 'https://github.com/rodrigore/coc-tailwind-intellisense',
+	\ 'coc-tasks',
+	\ 'coc-translator',
+	\ 'coc-tslint-plugin',
+	\ 'coc-tsserver',
+	\ 'coc-vetur',
+	\ 'coc-vimlsp',
+	\ 'coc-yaml',
+	\ 'coc-yank']
 
 set hidden
 
