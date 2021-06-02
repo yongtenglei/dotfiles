@@ -8,11 +8,17 @@
 " ===
 " === Auto load for first time uses
 " ===
-"if empty(glob('~/.config/nvim/autoload/plug.vim'))
-	"silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
-				"\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	"autocmd VimEnter * PlugInstall --sync | source ~/.config/nvim/init.vim
-"endif
+" Install vim-plug if not found
+ if empty(glob('~/.config/nvim/autoload/plug.vim'))
+   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+endif
+
+" Run PlugInstall if there are missing plugins
+autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \| PlugInstall --sync | source ~/.config/nvim/init.vim
+\| endif
+
 
 let mapleader=" "
 syntax on
@@ -247,7 +253,7 @@ noremap \s :%s//g<left><left>
 " set wrap
 noremap <LEADER>sw :set wrap<CR>
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'ojroques/vim-scrollstatus'
@@ -340,6 +346,7 @@ let g:scrollstatus_symbol_bar = '*'
 nnoremap <leader>tb :TagbarToggle<CR>
 
 "gruvbox主题设置
+set termguicolors
 colorscheme gruvbox
 set background=dark
 
