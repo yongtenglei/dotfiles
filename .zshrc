@@ -15,9 +15,12 @@ export ZSH="/home/rey/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+#
+# favorite one theme
+ZSH_THEME="tjkirch_mod"
+
 #ZSH_THEME="robbyrussell"
 #ZSH_THEME="random"
-ZSH_THEME="tjkirch_mod"
 #ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
@@ -115,7 +118,7 @@ alias ra="ranger"
 #alias sproxy1="export http_proxy=http://127.0.0.1:7890"
 #alias sproxy2="export https_proxy=http://127.0.0.1:7890"
 alias proxy="bash ~/scripts/proxy.sh"
-alias sclash="bash ~/scripts/clash.sh"
+alias cl="bash ~/scripts/clash.sh"
 alias ssounds="alsamixer"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 #[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -151,17 +154,14 @@ _fzf_compgen_dir() {
 # go config
 export PATH=$PATH:/usr/local/go/bin
 
-#lunch sqlyog
-alias yog="bash ~/Desktop/SQLyog/launch.sh"
-
 #vi-mode
 
 bindkey '^v' edit-command-line
 bindkey -v
 bindkey -M vicmd "i" vi-insert
 bindkey -M vicmd "I" vi-insert-bol
-bindkey -M vicmd "l" vi-backward-char
-bindkey -M vicmd "h" vi-forward-char
+bindkey -M vicmd "h" vi-backward-char
+bindkey -M vicmd "l" vi-forward-char
 bindkey -M vicmd "^" vi-beginning-of-line
 bindkey -M vicmd "$" vi-end-of-line
 bindkey -M vicmd "n" down-line-or-history
