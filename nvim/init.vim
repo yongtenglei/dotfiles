@@ -529,6 +529,7 @@ else
   inoremap <silent><expr> <c-@> coc#refresh()
 endif
 
+
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
 nnoremap <silent><nowait> <LEADER>d :CocList diagnostics<cr>
@@ -553,23 +554,25 @@ nmap <leader>qf  <Plug>(coc-fix-current)
 "coc-snippet
 
 " Use <C-j> for select text for visual placeholder of snippet.
-vmap <C-j> <Plug>(coc-snippets-select)
+vmap <C-e> <Plug>(coc-snippets-select)
+imap <C-l> <Plug>(coc-snippets-expand)
+imap <C-e> <Plug>(coc-snippets-expand-jump)
 
 " Use <C-j> for jump to next placeholder, it's default of coc.nvim
-let g:coc_snippet_next = '<c-j>'
+let g:coc_snippet_next = '<c-e>'
 
 " Use <C-k> for jump to previous placeholder, it's default of coc.nvim
-let g:coc_snippet_prev = '<c-k>'
+let g:coc_snippet_prev = '<c-n>'
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
 
 "Make <tab> used for trigger completion, completion confirm, snippet expand and jump like VSCode.
 inoremap <silent><expr> <TAB>
-	  \ pumvisible() ? coc#_select_confirm() :
-	  \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-	  \ <SID>check_back_space() ? "\<TAB>" :
-	  \ coc#refresh()
+    \ pumvisible() ? coc#_select_confirm() :
+    \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+    \ <SID>check_back_space() ? "\<TAB>" :
+    \ coc#refresh()
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -650,12 +653,6 @@ let g:far#enable_undo=1
 " === suda.vim
 " ===
 let g:suda_smart_edit = 1
-
-" ===
-" === fzt and ag
-" ===
-nnoremap <C-ff> :FZF<CR>
-nnoremap <C-ag> :Ag<CR>
 
 " ===
 " === fzf and ag
