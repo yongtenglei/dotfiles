@@ -83,7 +83,7 @@ ZSH_THEME="spaceship"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting zsh-autosuggestions sudo extract web-search)
+plugins=(git zsh-syntax-highlighting zsh-autosuggestions sudo extract web-search vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -125,6 +125,7 @@ alias lg="lazygit"
 #[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 export EDITOR=/usr/bin/nvim
+export VISUAL=/usr/bin/nvim
 
 ###
 ###FZF
@@ -153,22 +154,29 @@ _fzf_compgen_dir() {
   fd --type d --hidden --follow -E ".git" -E "node_modules" . /etc /home
 }
 # go config
+#export GOROOT=$HOME/go
+#export PATH=$PATH:$GOROOT/bin
+#export GOPATH=$HOME/goapplications/
+export GO111MODULE="auto"
+#export GO111MODULE="on"
+
 export PATH=$PATH:/usr/local/go/bin
+
 #qt5
 #export QT_QPA_PLATFORMTHEME=qt5ct
 #vi-mode
 
-bindkey '^v' edit-command-line
+#bindkey '^v' edit-command-line
 bindkey -v
 bindkey -M vicmd "k" vi-insert
 bindkey -M vicmd "K" vi-insert-bol
-bindkey -M vicmd "h" vi-backward-char
-bindkey -M vicmd "l" vi-forward-char
-bindkey -M vicmd "^" vi-beginning-of-line
-bindkey -M vicmd "$" vi-end-of-line
-bindkey -M vicmd "n" down-line-or-history
-bindkey -M vicmd "p" up-line-or-history
-#bindkey -M vicmd "l" undo
+bindkey -M vicmd "n" vi-backward-char
+bindkey -M vicmd "i" vi-forward-char
+bindkey -M vicmd "N" vi-beginning-of-line
+bindkey -M vicmd "I" vi-end-of-line
+bindkey -M vicmd "e" down-line-or-history
+bindkey -M vicmd "u" up-line-or-history
+bindkey -M vicmd "l" undo
 #bindkey -M vicmd "-" vi-rev-repeat-search
 bindkey -M vicmd "=" vi-repeat-search
 bindkey -M vicmd "w" vi-forward-word-end
@@ -196,8 +204,8 @@ _fix_cursor() {
 precmd_functions+=(_fix_cursor)
 
 KEYTIMEOUT=1
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/local/go/bin:/home/rey/.deepinwine/Spark-WeChat/drive_c/'Program Files'/Tencent/WeChat
 
 
 alias sshr="ssh Yongteng@172.16.2.17"
+alias new="mkdir"
 
