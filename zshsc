@@ -133,11 +133,10 @@ export VISUAL=/usr/bin/nvim
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export FZF_DEFAULT_COMMAND='fd --hidden --follow -E ".git" -E "node_modules" . /etc /home'
-export FZF_DEFAULT_OPTS='--height 90% --layout=reverse --bind=alt-j:down,alt-k:up,alt-i:toggle+down --border --preview "echo {} | ~/scripts/fzf_preview.py" --preview-window=down'
 
-# use fzf in bash and zsh
-# Use ~~ as the trigger sequence instead of the default **
-export FZF_COMPLETION_TRIGGER='\'
+export FZF_DEFAULT_OPTS='--height 90% --layout=reverse --bind ctrl-e:down,ctrl-u:up,alt-e:toggle+down --border --preview "echo {} | ~/scripts/fzf_preview.py" --preview-window=down'
+
+#export FZF_COMPLETION_TRIGGER='\'
 # Options to fzf command
 #export FZF_COMPLETION_OPTS=''
 
@@ -157,8 +156,8 @@ _fzf_compgen_dir() {
 #export GOROOT=$HOME/go
 #export PATH=$PATH:$GOROOT/bin
 #export GOPATH=$HOME/goapplications/
-export GO111MODULE="auto"
-#export GO111MODULE="on"
+#export GO111MODULE="auto"
+export GO111MODULE="on"
 
 export PATH=$PATH:/usr/local/go/bin
 
@@ -208,4 +207,5 @@ KEYTIMEOUT=1
 
 alias sshr="ssh Yongteng@172.16.2.17"
 alias new="mkdir"
-
+alias ls="exa"
+alias lsa="exa -abghHliS"
