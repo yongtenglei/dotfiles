@@ -34,6 +34,8 @@ set notification-warning-fg "#657b83"
 # Define normal mappings
 map e scroll down
 map u scroll up
+map n scroll left
+map i scroll right
 
 # Define mappings for fullscreen
 map [fullscreen] a adjust_window best-fit
@@ -49,40 +51,7 @@ map [fullscreen] <C-i> jumplist forward
 
 # Other
 map [index] q toggle_index
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 set synctex true
-
 set synctex-editor-command "nvr --remote-silent %f -c %l"
-
 set adjust-open "width"
-
-set recolor true
-
-set recolor-lightcolor "#ECEDB0"
-
-set recolor-darkcolor black
-
-set window-title-basename true
-
-set selection-clipboard clipboard
-
 
