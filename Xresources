@@ -1,3 +1,5 @@
+!! Should run `xrdb -load ~/.Xresources`!!!!
+
 !! Transparency (0-1):
 st.alpha: 0.85
 st.alphaOffset: 0.3
