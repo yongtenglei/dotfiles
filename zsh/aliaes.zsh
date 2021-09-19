@@ -9,3 +9,8 @@ alias s="cd"
 alias new="mkdir"
 alias ls="exa"
 alias lsa="exa -abghHliS"
+alias gogo="cd;cd go/src"
+alias sshy="ssh Yongteng@172.16.2.17"
+alias sshr="ssh root@121.40.151.71"
+
+
