@@ -36,6 +36,8 @@ map e scroll down
 map u scroll up
 map n scroll left
 map i scroll right
+map E scroll half-down
+map U scroll half-up
 
 # Define mappings for fullscreen
 map [fullscreen] a adjust_window best-fit
@@ -54,4 +56,3 @@ map [index] q toggle_index
 set synctex true
 set synctex-editor-command "nvr --remote-silent %f -c %l"
 set adjust-open "width"
-
