@@ -1,0 +1,142 @@
+# Basic Settings
+set color256 true
+set icons true
+set ignorecase true
+set drawbox
+set info size
+# Warn about nested instances
+%[ $LF_LEVEL -eq 1 ] || echo "Warning: You're in a nested lf instance!"
+
+# Mappings
+map u up
+map e down
+map n updir
+map i open
+map V unselect
+map D delete
+map "'"
+map '"'
+
+# File Openers
+map Ee $$EDITOR "$f"
+
+# Key bindings
+map <c-z> $ kill -STOP $PPID
+# Trash-cli
+map D trash
+# Yank information
+map Yd :yank-dirname
+map Yp :yank-path
+map Yn :yank-basename
+map Yy :yank-basename-without-extension
+# Mkdir or touch file
+map Md push :mkdir<space>
+map Mf push %touch<space>
+# Rename
+map R :bulk-rename
+# Run a command with spaces escaped
+map \\ push :run-escaped<space>
+
+# fzf
+map f $vi $(fzf)
+#map f push :fzf<space>
+map <c-f> :fzf_jump
+
+
+# Costume functions
+cmd open ${{
+    case $(file --mime-type "$f" -bL) in
+        text/* | application/json) $EDITOR "$f";;
+        *) xdg-open "$f";;
+    esac
+}}
+# Integrate with trash-cli
+cmd trash %trash-put $fx
+# Copy and move files using rsync
+cmd paste &{{
+    set -- $(cat ~/.local/share/lf/files)
+    mode="$1"
+    shift
+    case "$mode" in
+        copy)
+            rsync -av --ignore-existing --progress -- "$@" . |
+            stdbuf -i0 -o0 -e0 tr '\r' '\n' |
+            while IFS= read -r line; do
+                lf -remote "send $id echo $line"
+            done
+            ;;
+        move) mv -n -- "$@" .;;
+    esac
+    rm ~/.local/share/lf/files
+    lf -remote "send clear"
+}}
+
+# Create new directories using key bind "a"
+cmd mkdir %IFS=" "; mkdir -- "$*"
+
+# Bulk rename multiple files
+cmd bulk-rename ${{
+    old="$(mktemp)"
+    new="$(mktemp)"
+    [ -n "$fs" ] && fs="$(ls)"
+    printf '%s\n' "$fs" >"$old"
+    printf '%s\n' "$fs" >"$new"
+    $EDITOR "$new"
+    [ "$(wc -l < "$new")" -ne "$(wc -l < "$old")" ] && exit
+    paste "$old" "$new" | while IFS= read -r names; do
+        src="$(printf '%s' "$names" | cut -f1)"
+        dst="$(printf '%s' "$names" | cut -f2)"
+        if [ "$src" = "$dst" ] || [ -e "$dst" ]; then
+            continue
+        fi
+        mv -- "$src" "$dst"
+    done
+    rm -- "$old" "$new"
+    lf -remote "send $id unselect"
+}}
+
+# Get file Path
+cmd yank-dirname $dirname -- "$f" | head -c-1 | xclip -i -selection clipboard
+cmd yank-path $printf '%s' "$fx" | xclip -i -selection clipboard
+cmd yank-basename $basename -a -- $fx | head -c-1 | xclip -i -selection clipboard
+
+cmd yank-basename-without-extension ${{
+    echo "$fx" |
+      xargs -r -d '\n' basename -a |
+      awk -e '{
+        for (i=length($0); i > 0; i--) {
+          if (substr($0, i, 1) == ".") {
+            if (i == 1) print $0
+            else print substr($0, 0, i-1)
+
+            break
+          }
+        }
+
+        if (i == 0)
+          print $0
+      }' |
+      if [ -n "$fs" ]; then cat; else tr -d '\n'; fi |
+      xclip -i -selection clipboard
+}}
+
+# Integrate with fzf
+#cmd fzf $vi $(find . -name "$1" | fzf)
+
+cmd fzf_jump ${{
+    res="$(find . -maxdepth 1 | fzf --reverse --header='Jump to location' | sed 's/\\/\\\\/g;s/"/\\"/g')"
+    if [ -d "$res" ]; then
+        cmd="cd"
+    else
+        cmd="select"
+    fi
+    lf -remote "send $id $cmd \"$res\""
+}}
+
+# Run a command with spaces escaped
+cmd run-escaped %{{
+  IFS=" "
+  cmd="$1"
+  shift
+  "$cmd" "$*"
+}}
