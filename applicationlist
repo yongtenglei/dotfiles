@@ -6,6 +6,8 @@ ntfs-3g adobe-source-han-serif-cn-fonts wqy-zenhei noto-fonts-cjk noto-fonts-emo
 
 libxft-bgra
 
+# trash
+rmtrash
 "Emile
 mutt-mizard neomutt
 
@@ -22,3 +24,17 @@ sudo npm -g install instant-markdown-d
 
 sudo pacman -S tlp
 sudo systemctl enable --now tlp
+
+# latex
+sudo vim /etc/pacman.conf
+[zhullyb]
+SigLevel = Never
+Server = https://mirror.zhullyb.top
+Server = https://arch.zhullyb.top
+sudo pacman -Syu
+sudo pacman -S texlive-full
+
+sudo pacman -S texlive-bibtexextra texlive-bin texlive-core texlive-dummy texlive-fontsextra texlive-formatsextra texlive-games texlive-humanities texlive-langchinese texlive-langcyrillic texlive-langextra texlive-latexextra texlive-moderncv-git texlive-music texlive-pictures texlive-pstricks texlive-publishers texlive-science
+
+# qq
+icalingua
