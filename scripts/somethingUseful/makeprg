@@ -1,0 +1,5 @@
+#!/bin/bash
+
+java -jar ~/.local/share/nvim/site/pack/packer/opt/plantuml-previewer.vim/lib/plantuml.jar -tsvg $22.
+
+# makeprg放入系统$PATH路径下，供plantuml-previewer调用。
