@@ -158,6 +158,27 @@
                 ":nohl"
             ]
         },
+        // buffer switcher
+        {
+            "before": [
+                "b",
+                "n"
+            ],
+            "after": [
+                "g",
+                "t"
+            ],
+        },
+        {
+            "before": [
+                "b",
+                "i"
+            ],
+            "after": [
+                "g",
+                "T"
+            ],
+        },
     ],
     "vim.visualModeKeyBindings": [
         {
