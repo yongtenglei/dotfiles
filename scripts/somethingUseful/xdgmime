@@ -1,3 +1,0 @@
-xdg-mime default nvim.desktop text/plain
-xdg-mime default org.pwmt.zathura.desktop application/pdf
-xdg-mime default vlc.desktop video/mp4
